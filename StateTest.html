@@ -11,10 +11,18 @@
     <meta name='viewport' content='width=device-width, initial-scale=1.25, user-scalable=yes' />
 
     <style>
-     h1, h2
+     h1
 	    {
           text-align: center;
         }
+     h3.Wins
+        {
+		   float: left;
+        }		
+	 h3.Lives
+        {
+		   float: right;
+        }		
     </style>
 
 </head>
@@ -23,8 +31,8 @@
 
     <h1></h1>
 
-    <h2>0</h2>
-
+    <h3 class="Wins">Captured 0</h3>
+    <h3 Class="Lives">Lives 10</h3>
    <svg
 
    xmlns:dc="http://purl.org/dc/elements/1.1/"
@@ -600,10 +608,11 @@ var StateLst=[{Abr:"WA",Name:"Washington"},{Abr:"OR",Name:"Oregon"},{Abr:"CA",Na
 var StateWins=[];
 
 var MyHeader = document.getElementsByTagName("h1")[0];
-
-var WinsHeader=document.getElementsByTagName("h2")[0];
-
+var WinsHeader=document.getElementsByTagName("h3")[0];
+var LivesHeader=document.getElementsByTagName("h3")[1];
 var StateIndex = 0;
+var Lives=10;
+
 
 
 
@@ -627,7 +636,9 @@ function State_Click(evt){
 
     State.style.setProperty("fill","gold", "");
 
-	if(StateLst.length==1){MyHeader.textContent="WINNER!";WinsHeader.textContent=StateWins.length;}
+	if(StateLst.length==1)
+	  { if(Lives==10){MyHeader.textContent="PERFECTION!";}else{MyHeader.textContent="WINNER!";}
+	    WinsHeader.textContent="Captured " + StateWins.length;}
 
 	else{
 
@@ -637,7 +648,7 @@ function State_Click(evt){
 
 	   MyHeader.textContent=StateLst[StateIndex].Name;
 
-	   WinsHeader.textContent=StateWins.length;
+	   WinsHeader.textContent="Captured " + StateWins.length;
 
 	}
 
@@ -646,8 +657,17 @@ function State_Click(evt){
    else if(!findState(StateWins,State.id)&&State.id!="")
 
    {
-
+    
     State.style.setProperty("fill","black", "");
+	if(Lives==0)
+	  {
+	    MyHeader.textContent="Game Over!";
+	  }
+	else
+	  {
+	  Lives--;
+	  LivesHeader.textContent="Lives " + Lives;
+	  }
 
    }
 
