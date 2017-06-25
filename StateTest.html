@@ -161,7 +161,7 @@ path:hover {
 
 </style>
 
-<g onclick="State_Click(evt)" style="fill:#d3d3d3;stroke:#ffffff;stroke-opacity:1;fill-opacity:1;stroke-width:0.75;stroke-miterlimit:4;stroke-dasharray:none"
+<g id="AllPaths" onclick="State_Click(evt)" style="fill:#d3d3d3;stroke:#ffffff;stroke-opacity:1;fill-opacity:1;stroke-width:0.75;stroke-miterlimit:4;stroke-dasharray:none"
 
 >
 
@@ -610,6 +610,7 @@ var StateWins=[];
 var MyHeader = document.getElementsByTagName("h1")[0];
 var WinsHeader=document.getElementsByTagName("h3")[0];
 var LivesHeader=document.getElementsByTagName("h3")[1];
+var AllPathsE1=document.getElementById("AllPaths");
 var StateIndex = 0;
 var Lives=10;
 
@@ -625,7 +626,10 @@ MyHeader.textContent=StateLst[StateIndex].Name;
 function State_Click(evt){
 
    var State= evt.target;
-
+   if(MyHeader.textContent=="Game Over!")
+   {
+     return;
+   }	 
    
 
    if(State.id==StateLst[StateIndex].Abr)
